@@ -1,3 +1,4 @@
+import json
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
@@ -40,17 +41,17 @@ def generate_question(topic, nb_questions):
 
         # Checks if there are at least 2 lines before accessing the elements
         if len(split_lines) >= 2:
-            questions = split_lines[0].split(":")[1].strip()
+            questions = split_lines[0].strip()
             answers = split_lines[1].strip()
             questions_and_answers[questions] = answers
         else:
-            print("Unexpected response format")
+            print("Unexpected/Invalid response format!")
 
-        return questions_and_answers
-        # print(questions_and_answers)
+    json_data = json.dumps(questions_and_answers)
+    return json_data
 
 
-# py_ques = generate_question("Python", 5)
-# print(py_ques)
+py_ques = generate_question("programming", 5)
+print(py_ques)
 
-# generate_question("Python", 5)
+# generate_question('programming', 3)
