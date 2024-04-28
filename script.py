@@ -38,10 +38,15 @@ def generate_question(topic, nb_questions):
         # print(completion.choices[0].message.content)
         response = completion.choices[0].message.content
         split_lines = response.split("\n")
-        questions = split_lines[0].split(":")[1].strip()
-        answers = split_lines[1].split(":")[1].strip()
 
-        questions_and_answers[questions] = answers
+        # Checks if there are at least 2 lines before accessing the elements
+        if len(split_lines) >= 2:
+            questions = split_lines[0].split(":")[1].strip()
+            answers = split_lines[1].split(":")[1].strip()
+            questions_and_answers[questions] = answers
+        else:
+            print("Unexpected response format")
+
         # questions.append(response)
 
         # return questions_and_answers
